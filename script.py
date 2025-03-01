@@ -7,9 +7,9 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # API credentials (replace with your actual keys)
-APIKEY = 'PLACEHOLDER'
-SECRETKEY = 'PLACEHOLDER'
-PASSPHRASE = 'PLACEHOLDER'
+APIKEY = 'bg_5d1cb9452a3304899158b7ff881ffe34'
+SECRETKEY = '27481bc176c4104a1b1c1b412996839b56c4aa3d2874da0a206f42d6906eecf6'
+PASSPHRASE = '11052021'
 
 try:
     # Initialize the Bitget client
@@ -122,11 +122,11 @@ try:
                         'usdtVol': ticker.get('usdtVolume', 0),
                         'rsi': round(rsi, 2)
                     }
-
+    sorted_rsi_filtered_tickers = dict(sorted(rsi_filtered_tickers.items(), key=lambda item: item[1]['rsi']))
     # Print the filtered results
-    if rsi_filtered_tickers:
-        logging.info(f"Found {len(rsi_filtered_tickers)} tickers with RSI > 70 or < 30")
-        for symbol, details in rsi_filtered_tickers.items():
+    if sorted_rsi_filtered_tickers:
+        logging.info(f"Found {len(sorted_rsi_filtered_tickers)} tickers with RSI > 70 or < 30")
+        for symbol, details in sorted_rsi_filtered_tickers.items():
             print(f"Symbol: {symbol}, USDT Volume: {details['usdtVol']}, RSI: {details['rsi']}")
     else:
         logging.info("No tickers found with RSI > 70 or < 30")
