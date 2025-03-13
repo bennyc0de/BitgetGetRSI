@@ -7,9 +7,9 @@ from datetime import datetime
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # API credentials (replace with your actual keys)
-APIKEY = 'bg_5d1cb9452a3304899158b7ff881ffe34'
-SECRETKEY = '27481bc176c4104a1b1c1b412996839b56c4aa3d2874da0a206f42d6906eecf6'
-PASSPHRASE = '11052021'
+APIKEY = 'api'
+SECRETKEY = 'key'
+PASSPHRASE = 'pass'
 
 try:
     # Initialize the Bitget client
@@ -38,7 +38,7 @@ try:
         exit()
 
     # Function to fetch historical candlestick data for a symbol
-    def get_historical_data(symbol, interval='1m', limit=15):
+    def get_historical_data(symbol, interval, limit=15):
         if interval == '1D':
             interval_seconds = 86400  # 1 day in seconds
         elif interval == '1m':
@@ -110,7 +110,7 @@ try:
         logging.info(f"Fetching data and calculating RSI for {symbol}")
         
         # Fetch historical data
-        df = get_historical_data(symbol, '1m', 15) 
+        df = get_historical_data(symbol, '1H', 15) 
         if df is not None:
             # Calculate RSI
             rsi = calculate_rsi(df)
